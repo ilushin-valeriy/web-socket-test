@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" >
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Target>System.out</Target>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${catalina.base}/logs/appplication.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+		  <!-- rollover daily -->
+		  <fileNamePattern>${catalina.base}/logs/appplication-%d{yyyy-MM-dd}p%i.txt</fileNamePattern>
+		   <!-- each file should be at most 100MB, keep 30 days worth of history, but at most 50GB -->
+		   <maxFileSize>100MB</maxFileSize>    
+		   <maxHistory>30</maxHistory>
+		   <totalSizeCap>50GB</totalSizeCap>
+		</rollingPolicy>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{5} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </root>
+    <logger name="ru.ilushin" level="DEBUG" additivity="false">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="STDOUT" />
+    </logger>
+</configuration>
