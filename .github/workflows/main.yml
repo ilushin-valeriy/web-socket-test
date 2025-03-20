@@ -19,7 +19,6 @@ jobs:
           java-version: '16'
 
       - name: Build with Maven
-        working-directory: web-socket-test
         run: mvn package -DskipTests=true
 
 
